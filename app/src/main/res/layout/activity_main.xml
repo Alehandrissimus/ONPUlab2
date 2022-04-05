@@ -28,10 +28,8 @@
 
     <ImageView
         android:id="@+id/iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:maxHeight="500dp"
-        android:maxWidth="350dp"
+        android:layout_width="350dp"
+        android:layout_height="500dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_picture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
