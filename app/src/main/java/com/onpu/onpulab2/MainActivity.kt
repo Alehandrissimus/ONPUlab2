@@ -62,13 +62,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnPicture.setOnClickListener {
-            grantCameraPermission()
-            latestUri = getFileUri()
-            getCameraImage.launch(latestUri)
-        }
-        binding.btnSend.setOnClickListener {
-            sendMailIntent()
+        binding.apply {
+            btnPicture.setOnClickListener {
+                grantCameraPermission()
+                latestUri = getFileUri()
+                getCameraImage.launch(latestUri)
+            }
+            btnSend.setOnClickListener {
+                sendMailIntent()
+            }
         }
     }
 
@@ -92,9 +94,9 @@ class MainActivity : AppCompatActivity() {
         val imageFileName = "JPEG_" + timeStamp + "_"
         val storageDir = applicationContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         val image = File.createTempFile(
-            imageFileName,  /* prefix */
-            ".jpg",  /* suffix */
-            storageDir /* directory */
+            imageFileName,
+            ".jpg",
+            storageDir
         )
         return FileProvider.getUriForFile(this, "com.onpu.onpulab2.fileprovider", image)
     }
@@ -105,8 +107,8 @@ class MainActivity : AppCompatActivity() {
             emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             emailIntent.setDataAndType(it, contentResolver.getType(it))
             emailIntent.putExtra(Intent.EXTRA_STREAM, it)
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("nick.godov@gmail.com"))
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Buryachenko O.O. AI-194")
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("hodovychenko.labs@gmail.com"))
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "КПП АИ-194 Буряченко О.О.")
             startActivity(Intent.createChooser(emailIntent, "Send with..."))
         }
     }
