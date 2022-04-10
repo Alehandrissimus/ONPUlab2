@@ -104,11 +104,13 @@ class MainActivity : AppCompatActivity() {
     private fun sendMailIntent() {
         latestUri?.let {
             val emailIntent = Intent(Intent.ACTION_SEND)
-            emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            emailIntent.setDataAndType(it, contentResolver.getType(it))
-            emailIntent.putExtra(Intent.EXTRA_STREAM, it)
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("hodovychenko.labs@gmail.com"))
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "КПП АИ-194 Буряченко О.О.")
+            emailIntent.apply {
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                setDataAndType(it, contentResolver.getType(it))
+                putExtra(Intent.EXTRA_STREAM, it)
+                putExtra(Intent.EXTRA_EMAIL, arrayOf("hodovychenko.labs@gmail.com"))
+                putExtra(Intent.EXTRA_SUBJECT, "КПП АИ-194 Буряченко О.О.")
+            }
             startActivity(Intent.createChooser(emailIntent, "Send with..."))
         }
     }
